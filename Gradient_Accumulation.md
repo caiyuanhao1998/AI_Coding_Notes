@@ -11,10 +11,13 @@ for x, y in loader:              # loader 的 batch_size = B
     buf.append(1)
     group_size = accum_steps if len(buf) < accum_steps else len(buf)
 
+    # criterion 是损失函数, model(x) 是模型的预测, y 是 label
+    # group_size 表示总的 batch size, 总共有那么多数量的 sample，每一个 Loss 本身不要求 mean
     (criterion(model(x), y) / group_size).backward()
     pending += 1
 
-    # 到组末（凑满4个）就更新
+    
+
     if pending == accum_steps:
         optimizer.step()
         optimizer.zero_grad(set_to_none=True)
