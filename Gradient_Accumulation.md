@@ -1,1 +1,2 @@
-# AI_Coding_Notes
+### 1. 极简使用 Gradient Accumulation
+
